@@ -1,4 +1,33 @@
 import moment from 'moment';
+import uuid from 'uuid';
+
+const url = `http://localhost:3000/events`;
+
+export async function getEvents() {
+  return await fetch(url)
+  .then(response => response.json())
+  .then(events => events.map(e => ({ ...e, date: new Date(e.date) })))
+  .catch(function(error) {
+    console.log(error.message);
+      throw error;
+    });
+}
+
+export function saveEvent({ title, date }) {
+  return fetch(url, {
+    method: 'POST',
+    body: JSON.stringify({
+      title,
+      date,
+      id: uuid(),
+    }),
+    headers: new Headers({
+      'Content-Type': 'application/json'
+    })
+  })
+  .then(res => res.json())
+  .catch(error => console.error('Error:', error));
+}
 
 export function formatDate(dateString) {
   const parsed = moment(new Date(dateString));
