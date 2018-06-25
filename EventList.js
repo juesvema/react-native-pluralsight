@@ -50,7 +50,7 @@ class EventList extends Component {
                 style={styles.list}
                 data={this.state.events}
                 renderItem={({ item }) => <EventCard event={item} />}
-                keyExtractor={item => item.id}
+                key={uuid()}
             />,
             <ActionButton
                 key={uuid()}
