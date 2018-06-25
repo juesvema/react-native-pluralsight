@@ -5,6 +5,7 @@ import {
 } from 'react-native';
 import EventCard from './EventCard';
 import ActionButton from 'react-native-action-button';
+import uuid from 'uuid';
 
 const styles = StyleSheet.create({
     list: {
@@ -47,7 +48,7 @@ class EventList extends Component {
                 keyExtractor={item => item.id}
             />,
             <ActionButton
-                key="fab"
+                key={uuid()}
                 buttonColor="rgba(231,76,60,1)"
                 onPress={this.handleAddEvent}
             />,
